@@ -3,6 +3,10 @@ def changer(cents)
 
 	quarters = cents / 25
 	change["quarters"]= quarters
+	cents = cents%25
+	dimes = cents / 10
+	change["dimes"]= dimes
+
 
 
 	return change
