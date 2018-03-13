@@ -26,4 +26,24 @@ class Coin_flip_test < Minitest::Test
 		cents = 10
 		assert_equal({"quarters"=>0, "dimes"=>1, "nickels"=>0, "pennies"=>0}, changer(cents))
 	end
+
+	def test_hash_returned_with_1_nickel
+		cents = 5
+		assert_equal({"quarters"=>0, "dimes"=>0, "nickels"=>1, "pennies"=>0}, changer(cents))
+	end
+
+	def test_hash_returned_with_1_penny
+		cents = 1
+		assert_equal({"quarters"=>0, "dimes"=>0, "nickels"=>0, "pennies"=>1}, changer(cents))
+	end
+
+
+
+
+
+
+
+
+
+
 end
