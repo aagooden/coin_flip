@@ -32,3 +32,19 @@ def change_singular(change)
 	return singular_change 
 
 end
+
+system("clear")
+puts "How much change do you have?"
+cents = gets.chomp
+cents = cents.to_i
+
+change = changer(cents)
+change = change_singular(change)
+
+puts ''
+puts "I need to give you"
+
+change.each do |key,value|
+	puts "#{value} - #{key}"
+end
+puts ''

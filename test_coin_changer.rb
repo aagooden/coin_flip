@@ -53,22 +53,20 @@ class Coin_changer_test < Minitest::Test
 		assert_equal(Hash, change_singular(change).class)
 	end
 
-
 	def test_hash_keys_singular_if_only_one_coin
 		change = {"quarters"=>1, "dimes"=>1, "nickels"=>1, "pennies"=>1}
 		assert_equal({"quarter"=>1, "dime"=>1, "nickel"=>1, "penney"=>1}, change_singular(change))
 	end
 
+	def test_functions_working_together_to_produce_correct_output_69cents
+		cents = 69
+		temp_change = changer(cents)
+		assert_equal({"quarters"=>2, "dime"=>1, "nickel"=>1, "pennies"=>4}, change_singular(temp_change))
+	end
 
-
-
-
-
-
-
-
-
-
-
-
+	def test_functions_working_together_to_produce_correct_output_89cents
+		cents = 89
+		temp_change = changer(cents)
+		assert_equal({"quarters"=>3, "dime"=>1, "nickels"=>0, "pennies"=>4}, change_singular(temp_change))
+	end	
 end
