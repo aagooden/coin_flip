@@ -1,7 +1,7 @@
 require "minitest/autorun"
 require_relative "coin_changer.rb"
 
-class Coin_flip_test < Minitest::Test
+class Coin_changer_test < Minitest::Test
 
 	def test_boolean
 		assert_equal(true, true)
@@ -41,6 +41,24 @@ class Coin_flip_test < Minitest::Test
 		cents = 41
 		assert_equal({"quarters"=>1, "dimes"=>1, "nickels"=>1, "pennies"=>1}, changer(cents))
 	end
+
+
+	def test_hash_returned_with_2quarters_1penny
+		cents = 51
+		assert_equal({"quarters"=>2, "dimes"=>0, "nickels"=>0, "pennies"=>1}, changer(cents))
+	end
+
+	def test_change_singular_returns_hash
+		change = {"quarters"=>1, "dimes"=>1, "nickels"=>1, "pennies"=>1}
+		assert_equal(Hash, change_singular(change).class)
+	end
+
+
+	def test_hash_keys_singular_if_only_one_coin
+		change = {"quarters"=>1, "dimes"=>1, "nickels"=>1, "pennies"=>1}
+		assert_equal({"quarter"=>1, "dime"=>1, "nickel"=>1, "penney"=>1}, change_singular(change))
+	end
+
 
 
 
