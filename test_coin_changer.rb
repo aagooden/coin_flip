@@ -12,29 +12,24 @@ class Coin_changer_test < Minitest::Test
 		assert_equal(Hash, changer(cents).class)
 	end
 
-	def test_hash_returned_with_coin_keys_and_values_zero
-		cents = 50
-		assert_equal(["quarters", "dimes", "nickels", "pennies"], changer(cents).keys)
-	end
-
 	def test_hash_returned_with_1_quarter
 		cents = 25
-		assert_equal({"quarters"=>1, "dimes"=>0, "nickels"=>0, "pennies"=>0}, changer(cents))
+		assert_equal({"quarters"=>1}, changer(cents))
 	end
 
 	def test_hash_returned_with_1_dime
 		cents = 10
-		assert_equal({"quarters"=>0, "dimes"=>1, "nickels"=>0, "pennies"=>0}, changer(cents))
+		assert_equal({"dimes"=>1}, changer(cents))
 	end
 
 	def test_hash_returned_with_1_nickel
 		cents = 5
-		assert_equal({"quarters"=>0, "dimes"=>0, "nickels"=>1, "pennies"=>0}, changer(cents))
+		assert_equal({"nickels"=>1}, changer(cents))
 	end
 
 	def test_hash_returned_with_1_penny
 		cents = 1
-		assert_equal({"quarters"=>0, "dimes"=>0, "nickels"=>0, "pennies"=>1}, changer(cents))
+		assert_equal({"pennies"=>1}, changer(cents))
 	end
 
 	def test_hash_returned_with_1quarter_1dime_1nickel_1penny_from_41cents
@@ -45,7 +40,7 @@ class Coin_changer_test < Minitest::Test
 
 	def test_hash_returned_with_2quarters_1penny
 		cents = 51
-		assert_equal({"quarters"=>2, "dimes"=>0, "nickels"=>0, "pennies"=>1}, changer(cents))
+		assert_equal({"quarters"=>2,"pennies"=>1}, changer(cents))
 	end
 
 	def test_change_singular_returns_hash
@@ -55,7 +50,7 @@ class Coin_changer_test < Minitest::Test
 
 	def test_hash_keys_singular_if_only_one_coin
 		change = {"quarters"=>1, "dimes"=>1, "nickels"=>1, "pennies"=>1}
-		assert_equal({"quarter"=>1, "dime"=>1, "nickel"=>1, "penney"=>1}, change_singular(change))
+		assert_equal({"quarter"=>1, "dime"=>1, "nickel"=>1, "penny"=>1}, change_singular(change))
 	end
 
 	def test_functions_working_together_to_produce_correct_output_69cents
@@ -67,6 +62,18 @@ class Coin_changer_test < Minitest::Test
 	def test_functions_working_together_to_produce_correct_output_89cents
 		cents = 89
 		temp_change = changer(cents)
-		assert_equal({"quarters"=>3, "dime"=>1, "nickels"=>0, "pennies"=>4}, change_singular(temp_change))
+		assert_equal({"quarters"=>3, "dime"=>1, "pennies"=>4}, change_singular(temp_change))
+	end	
+
+	def test_functions_working_together_to_produce_correct_output_0cents
+		cents = 0
+		temp_change = changer(cents)
+		assert_equal({}, change_singular(temp_change))
+	end	
+
+	def test_functions_working_together_to_produce_correct_output_48cents
+		cents = 48
+		temp_change = changer(cents)
+		assert_equal({"quarter"=>1, "dimes"=>2, "pennies"=>3}, change_singular(temp_change))
 	end	
 end

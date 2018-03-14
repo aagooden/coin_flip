@@ -12,6 +12,8 @@ def changer(cents)
 	cents = cents % 5
 	change["pennies"] = cents
 
+	change.each {|key, value| if value == 0 then change.delete(key) end }
+
 	return change
 end
 
@@ -20,11 +22,10 @@ def change_singular(change)
 	change.each do |key,value| 
 
 			if value == 1 && key == "pennies"
-				new_key = "penney"
+				new_key = "penny"
 			elsif value == 1
 				new_key = key.delete("s")
-			else
-				new_key = key
+			else new_key = key
 			end
 
 		singular_change[new_key] = value
